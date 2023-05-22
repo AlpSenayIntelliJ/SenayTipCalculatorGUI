@@ -1,10 +1,8 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
-public class MainGUIWindow extends JFrame implements ActionListener, KeyListener {
+public class MainGUIWindow extends JFrame implements ActionListener {
     private JPanel mainPanel;
     private JTextField numPeopTextField;
     private JButton addNumPeopButton;
@@ -38,9 +36,7 @@ public class MainGUIWindow extends JFrame implements ActionListener, KeyListener
         addTipButton.addActionListener(this);
         addNumPeopButton.addActionListener(this);
         subtractNumButton.addActionListener(this);
-        tipTextField.addKeyListener(this);
-        billTextField.addKeyListener(this);
-        numPeopTextField.addKeyListener(this);
+        saveLikeSethButton.addActionListener(this);
         setVisible(true);
     }
 
@@ -61,29 +57,16 @@ public class MainGUIWindow extends JFrame implements ActionListener, KeyListener
                 numPeople--;
             }
             if (button.equals(saveLikeSethButton)) {
-                bill = Double.parseDouble(billTextField.getText());
+                numPeople = Integer.parseInt(numPeopTextField.getText());
+                tipPercent = Integer.parseInt(tipTextField.getText());
             }
 
+            bill = Double.parseDouble(billTextField.getText());
             textAreaTip.setText((int) (bill*tipPercent/numPeople)/100.0+"");
-            textAreaTotal.setText("abc"+((bill*(1+tipPercent/100.0))/numPeople));
+            textAreaTotal.setText((int) ((bill*(1+tipPercent/100.0))/numPeople * 100) / 100.0 + "");
 
             tipTextField.setText(Integer.toString(tipPercent));
             numPeopTextField.setText(""+numPeople);
         }
-    }
-
-    @Override
-    public void keyTyped(KeyEvent e) {
-
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-
     }
 }
